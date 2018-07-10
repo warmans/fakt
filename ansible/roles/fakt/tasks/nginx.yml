@@ -1,0 +1,17 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    update_cache: yes
+    state: latest
+
+- name: Deploy Nginx configs
+  template: 
+    src: "{{ item }}"
+    dest: "/etc/nginx/sites-enabled/{{ item }}"
+  with_items: 
+      - fakt.conf
+  notify: restart nginx
+
+- name: Test Nginx configs 
+  command: nginx -t

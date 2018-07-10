@@ -1,0 +1,34 @@
+---
+- include: ufw.yml
+  when: fakt_use_ufw|bool == true
+
+- include: nginx.yml
+  when: fakt_use_nginx|bool == true
+
+- name: Install PIP
+  apt:
+    name: python-pip
+    update_cache: yes
+
+- pip:
+    name: docker-py
+    version: 1.10.6
+
+- name: Setup container
+  docker_container:
+    name: fakt
+    state: started
+    restart: true
+    image: "{{ fakt_image }}"
+    pull: true
+    restart_policy: always
+    volumes:
+      - "/opt/fakt/db:/opt/fakt/db"
+      - "/opt/fakt/static:/opt/fakt/static"
+    published_ports:
+      - "8080:8080"
+    env:
+      SERVER_BIND: "{{ fakt_server_bind }}"
+      CRAWLER_STRESSFAKTOR_URI: "{{ fakt_crawler_sfaktor_uri }}"
+      LOG_VERBOSE: "{{ fakt_log_verbose }}"
+

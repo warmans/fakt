@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -34,7 +33,6 @@ type Config struct {
 	ServerLocation         string
 	CrawlerStressfaktorURI string
 	DbPath                 string
-	EncryptionKey          string
 	CrawlerRun             bool
 	StaticFilesPath        string
 	UIDistPath             string
@@ -100,10 +98,6 @@ func (s *Server) Start() error {
 		go activityRunner.Run(s.db.NewSession(nil))
 	}
 
-	//sessions
-	if s.conf.EncryptionKey == "" {
-		return fmt.Errorf("you must specify an auth.key")
-	}
 
 	API := v1.API{
 		AppVersion:     Version,

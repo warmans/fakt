@@ -1,0 +1,12 @@
+---
+fakt_use_ufw: true
+fakt_use_nginx: true
+
+fakt_server_bind: :8080
+fakt_hostname: fakt.pw
+fakt_image: warmans/fakt:4.0.0
+fakt_crawler_sfaktor_uri: https://stressfaktor.squat.net/termine.php?days=all
+fakt_log_verbose: false
+
+fakt_ui_image: warmans/fakt-ui:2.0.0
+

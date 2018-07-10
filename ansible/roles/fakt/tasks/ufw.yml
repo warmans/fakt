@@ -1,0 +1,21 @@
+---
+- name: Install UFW
+  apt:
+    name: ufw
+    update_cache: yes
+    state: latest
+
+- name: Allow SSH
+  ufw:
+    rule: allow
+    name: OpenSSH
+    state: enabled
+
+- name: Allow HTTP
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+    state: enabled
+
+  

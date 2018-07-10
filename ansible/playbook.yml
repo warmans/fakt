@@ -1,0 +1,6 @@
+---
+- hosts: fakt
+  roles:
+     - fakt
+  vars:
+    fakt_image: warmans/fakt:4.0.0
