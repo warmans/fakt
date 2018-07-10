@@ -1,0 +1,19 @@
+<h3 class="text-primary">{{listTitle}}</h3>
+<div *ngIf="events">
+    <div *ngFor="let event of events" class="card mb-2">
+      <div class="card-header">
+        <a [routerLink]="['/event', event.id]" >{{event.getTitle()}}</a> <span class="text-muted">on {{event.date | amCalendar}}</span>
+      </div>
+      <div class="card-block">
+        <div class="card-text">
+          <div class="media">
+            <a class="media-left media-top mr-2" [routerLink]="['/event', event.id]">
+              <img class="media-object" style="width: 40px; height: 40px;"
+                   [src]="event.getImageURL('sm') ? '/static/'+event.getImageURL('sm') : '/assets/person-placeholder.jpg'">
+            </a>
+            <div class="media-body">{{event.description | shorten:128}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="card mb-2" *ngIf="event">
+  <div class="card-header">
+    <div class="media">
+      <div class="media-left">
+        <!--a class="media-left media-top" href="#">
+                    <img class="media-object" style="width: 60px; height: 60px;" [src]="'/assets/venue-placeholder.jpg'" alt="Generic placeholder image">
+                </a-->
+      </div>
+      <div class="media-body">
+        <!--div class="pull-right">
+          <app-utags [(tags)]="ev.utag" [save]="'/api/v1/event/'+ev.id+'/tag'" [enabled]="userService.me != null"></app-utags>
+        </div-->
+        <h2 class="text-primary"><a [routerLink]="['/event', event.id]">{{event.type}} at {{event.venue.name}}</a></h2>
+        <div>
+          <i class="fa fa-calendar-o" aria-hidden="true"></i> {{event.date | amCalendar}} <span class="text-muted">({{event.date | amTimeAgo}})</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-block">
+    <div class="card-text">
+      <div class="media">
+        <div class="media-body">
+          <p>
+            {{event.description | shorten:1024}}
+          </p>
+          <hr *ngIf="event.performer">
+
+          <div class="media mt-2" *ngFor="let performer of event.performer; let i = index;">
+            <a class="media-left media-top mr-2" [routerLink]="['/performer', performer.id]">
+              <img class="media-object" style="width: 40px; height: 40px;"
+                   [src]="performer.images['sm'] ? '/static/'+performer.images['sm'] : '/assets/person-placeholder.jpg'">
+            </a>
+            <div class="media-body">
+              <strong class="media-heading">{{performer.name}}</strong>
+              <span class="text-muted">:: {{performer.genre}}</span>
+              <div>{{performer.info}}</div>
+              <div class="performer-links">
+                <a target="_blank" [href]="performer.listen_url" *ngIf="performer.listen_url"><i
+                  class="fa fa-headphones" aria-hidden="true"></i> Listen</a>
+                <a target="_blank" href="https://google.com/search?q={{performer.name}}+band+{{performer.home}}"><i
+                  class="fa fa-search"></i> Search</a>
+                <span class="text-primary"><i class="fa fa-heartbeat"></i> {{performer.activity}}</span>
+              </div>
+              <hr *ngIf="i < event.performer.length-1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-muted">
+    <div class="pull-left">
+      <i class="fa fa-map-signs" aria-hidden="true"></i>
+      {{event.venue.name}} <span *ngIf="event.venue.address"> at {{event.venue.address}}</span>
+    </div>
+    <div class="pull-right">
+      <span *ngFor="let tag of event.getTags(5)" class="badge badge-primary" style="margin-right: 5px;">{{tag}}</span>
+    </div>
+
+  </div>
+</div>
+
+

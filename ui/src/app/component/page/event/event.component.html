@@ -1,0 +1,9 @@
+<div class="loading-overlay" *ngIf="loadingService.isLoading | async">LOADING...</div>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <app-event-detail [event]="event"></app-event-detail>
+    <div class="m-t-2">
+      <app-event-compact-list [events]="similarEvents"></app-event-compact-list>
+    </div>
+  </div>
+</div>

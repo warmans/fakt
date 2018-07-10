@@ -1,0 +1,10 @@
+@media (min-width: 700px) {
+  .sidebar {
+    flex: 0 0 300px;
+  }
+
+  .main {
+    flex: 1;
+    margin-left: -15px;
+  }
+}

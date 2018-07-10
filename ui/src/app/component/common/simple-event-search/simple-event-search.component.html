@@ -1,0 +1,42 @@
+<form>
+  <div class="row">
+    <div class="col-sm mb-2">
+      <div class="form-group">
+        <select
+          placeholder="When..."
+          class="form-control"
+          id="date_relative"
+          name="date_relative"
+          [(ngModel)]="query['date_relative']"
+          (ngModelChange)="handleFormChange($event, query)">
+          <option value="">Any Time</option>
+          <option value="today">Today</option>
+          <option value="tomorrow">Tomorrow</option>
+          <option value="this weekend">This Weekend</option>
+          <!--option value="next weekend">Next Weekend</option-->
+          <option value="this week">This Week</option>
+          <option value="this month">This Month</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm mb-2">
+      <div class="form-group">
+        <select
+          placeholder="What..."
+          class="form-control"
+          id="tag"
+          name="tag"
+          [(ngModel)]="query['tag']"
+          (ngModelChange)="handleFormChange($event, query)">
+          <option value="">None</option>
+          <option *ngFor="let tag of tags | async" value="{{tag.id}}">{{tag.tag}} ({{tag.stat_events}})</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm mb-2">
+      <div class="form-group">
+        <input name="keyword" class="form-control" placeholder="Keyword..." [(ngModel)]="keyword" (ngModelChange)="handleKeywordChange(keyword)"/>
+      </div>
+    </div>
+  </div>
+</form>

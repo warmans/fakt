@@ -1,0 +1,12 @@
+{
+  "/api": {
+    "target": "http://api.fakt.pw",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/static": {
+    "target": "http://api.fakt.pw",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

@@ -1,0 +1,16 @@
+<nav class="navbar navbar-dark bg-dark component-bg">
+  <a class="navbar-brand" [routerLink]="['/browse']"><i class="fa fa-star" aria-hidden="true"></i> FAKT</a>
+</nav>
+<div class="container-fluid pt-2">
+  <div class="row">
+    <div class="col-lg-12">
+        <div  *ngFor="let alert of notificationService.notifications; let i = index;" (click)="notificationService.dismiss(i)" class="alert {{alert.cls}}" role="alert">
+            <button type="button" class="close"  aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{alert.message}}
+        </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
